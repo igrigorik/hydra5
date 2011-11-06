@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+
+lib = File.expand_path(File.dirname(__FILE__) + '/../lib')
+$LOAD_PATH.unshift(lib) if File.directory?(lib) && !$LOAD_PATH.include?(lib)
+
+require 'hydra'
+require 'optparse'
+
+ARGV << '--help' if ARGV.empty?
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: hydra [options]"
+
+  opts.on("-l", "--listen PORT", Integer, "Port to listen on") do |v|
+    options[:listen] = v
+  end
+
+  opts.on("-h", "--hosts host1,host2,...", Array, "List of proxy hosts") do |v|
+    options[:hosts] = v
+  end
+
+  opts.on("-k", "--key path/to/key", String, "SSH key for the proxy hosts") do |v|
+    options[:key] = v
+  end
+
+  opts.on("-u", "--user username", String, "SSH username for the proxy hosts") do |v|
+    options[:user] = v
+  end
+
+  opts.on("-v", "--verbose", "Run in debug mode") do |v|
+    options[:verbose] = v
+  end
+end.parse!
+
+Hydra::Proxy.new(options).start!

@@ -8,11 +8,12 @@ Gem::Specification.new do |s|
   s.authors     = ["Ilya Grigorik"]
   s.email       = ["ilya@igvita.com"]
   s.homepage    = "https://github.com/igrigorik/hydra"
-  s.summary     = "SOCKS5 Hydra proxy - a multiheaded beast"
+  s.summary     = "Load-balanced (multi-headed) SOCKS5 proxy"
   s.description = s.summary
 
   s.rubyforge_project = "hydra"
 
+  s.add_dependency "eventmachine", ">= 1.0.0.beta.4"
   s.add_dependency "em-proxy"
   s.add_development_dependency "rspec"
 
