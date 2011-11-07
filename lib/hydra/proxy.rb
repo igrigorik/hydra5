@@ -22,7 +22,7 @@ module Hydra
       @hosts = @hosts.inject({}) {|h,k| h[@hosts.index(k)] = k; h}
 
       @log.info "Establishing #{@hosts.size} SOCKS5 tunnels"
-      @live = {}
+      @@live = {}
       @pids = []
     end
 
@@ -41,15 +41,15 @@ module Hydra
 
           @pids << EM.system(tunnel) do |cmd, out|
             @log.error ["Connection closed", out, @hosts[index]]
-            @live.delete(index)
+            @@live.delete(index)
 
-            if @live.empty?
+            if @@live.empty?
               @log.info "No live tunnels left, exiting"
               exit
             end
           end
 
-          @live[index] = host
+          @@live[index] = host
         end
 
         at_exit do
@@ -60,10 +60,11 @@ module Hydra
         end
 
         @log.info "Starting proxy on port #{@listen}"
-        ::Proxy.start(:host => "0.0.0.0", :port => @listen) do |conn|
-          tunnel = @live.keys.shuffle.first
 
-          @log.info ["Routing request to", tunnel, @hosts[tunnel]]
+        ::Proxy.start(:host => "0.0.0.0", :port => @listen, :debug => @verbose) do |conn|
+          tunnel = @@live.keys.shuffle.first
+
+          puts "routing connection to #{@@live[tunnel]}"
           conn.server :srv, :host => "127.0.0.1", :port => 7000 + tunnel, :relay_client => true, :relay_server => true
         end
       end
