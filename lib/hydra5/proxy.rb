@@ -1,12 +1,12 @@
 require 'em-proxy'
 
-module Hydra
+module Hydra5
 
   class Logger
     [:info, :error].each do |m|
       define_method m do |msg|
         msg = msg.join(", ") if msg.is_a? Array
-        puts ["Hydra", m, msg].join(" :: ")
+        puts ["Hydra5", m, msg].join(" :: ")
       end
     end
   end

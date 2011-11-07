@@ -3,14 +3,14 @@
 lib = File.expand_path(File.dirname(__FILE__) + '/../lib')
 $LOAD_PATH.unshift(lib) if File.directory?(lib) && !$LOAD_PATH.include?(lib)
 
-require 'hydra'
+require 'hydra5'
 require 'optparse'
 
 ARGV << '--help' if ARGV.empty?
 
 options = {}
 OptionParser.new do |opts|
-  opts.banner = "Usage: hydra [options]"
+  opts.banner = "Usage: hydra5 [options]"
 
   opts.on("-l", "--listen PORT", Integer, "Port to listen on") do |v|
     options[:listen] = v
@@ -33,4 +33,4 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-Hydra::Proxy.new(options).start!
+Hydra5::Proxy.new(options).start!

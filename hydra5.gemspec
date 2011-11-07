@@ -1,13 +1,13 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "hydra/version"
+require "hydra5/version"
 
 Gem::Specification.new do |s|
-  s.name        = "hydra"
+  s.name        = "hydra5"
   s.version     = Hydra::VERSION
   s.authors     = ["Ilya Grigorik"]
   s.email       = ["ilya@igvita.com"]
-  s.homepage    = "https://github.com/igrigorik/hydra"
+  s.homepage    = "https://github.com/igrigorik/hydra5"
   s.summary     = "Load-balanced (multi-headed) SOCKS5 proxy"
   s.description = s.summary
 
