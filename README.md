@@ -10,7 +10,7 @@ Hydra uses SSH to establish the SOCKS5 tunnels and [em-proxy](https://github.com
 
 ```
 $> gem install hydra5
-$> hydra --listen 8080 --hosts host1,host2 --key ssh_key.pub --user name --verbose
+$> hydra5 --listen 8080 --hosts host1,host2 --key ssh_key.pub --user name --verbose
 ```
 
 ```ruby
