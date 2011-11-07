@@ -4,7 +4,7 @@ require "hydra5/version"
 
 Gem::Specification.new do |s|
   s.name        = "hydra5"
-  s.version     = Hydra::VERSION
+  s.version     = Hydra5::VERSION
   s.authors     = ["Ilya Grigorik"]
   s.email       = ["ilya@igvita.com"]
   s.homepage    = "https://github.com/igrigorik/hydra5"
